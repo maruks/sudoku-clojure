@@ -4,5 +4,4 @@
 
 (defn -main [& args]
   (if (seq args)
-    (println (fibo (Integer. (first args))))
     (println "Usage: fibo <number>")))
