@@ -1,5 +1,12 @@
 sudoku solver
 
+## Build
+
+lein deps
+lein compile
+lein midje
+lein uberjar
+
 ## Usage
 
 java -jar sudoku-1.0.0-SNAPSHOT-standalone.jar test/resources/puzzle3.txt
