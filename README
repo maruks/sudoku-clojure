@@ -1,13 +1,7 @@
 sudoku solver
 
-FIXME: write description
-
 ## Usage
 
-FIXME: write
+java -jar sudoku-1.0.0-SNAPSHOT-standalone.jar test/resources/puzzle3.txt
 
-## License
 
-Copyright (C) 2011 FIXME
-
-Distributed under the Eclipse Public License, the same as Clojure.
