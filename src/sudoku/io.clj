@@ -8,4 +8,5 @@
 (defn writeFile [f vec]
   (if (nil? vec)
     (dst/spit f "No solution")
-    (dst/spit f (apply str (interpose "," vec)))))
+    (let [s (apply str(interpose "\n" (for [p (partition 9 vec)] (apply str(interpose "," p)))))]
+      (dst/spit f s))))
