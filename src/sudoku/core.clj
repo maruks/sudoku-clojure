@@ -1,5 +1,6 @@
 (ns sudoku.core
-  (:use clojure.set))
+  (:use clojure.set)
+  (:use [clojure.contrib.seq :only [find-first]]))
 
 (defn selectRow [vec i]
   (let [start (- i (rem i 9))
@@ -33,4 +34,4 @@
       (if (not (seq (s 1)))
         nil
         (let [sol (for [i (s 1)] (solve (assoc vec (first s) i))) ]
-          (some #(if (nil? %) false %) sol))))))
+          (find-first #(not (nil? %)) sol))))))
