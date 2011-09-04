@@ -4,7 +4,12 @@
   (:gen-class))
 
 (defn -main [& args]
-  (if (seq args)
-    (let [f (readFile (first args))
-          s (solve f)] (writeFile System/out s))
-    (println "Usage: SudokuSolver <file name>")))
+
+  (cond (= (count args) 1) (let [board (read-file (first args))
+                                 solution (solve board)]
+                             (write-file solution))
+        (= (count args) 2) (let [boards (read-batch-file (first args))
+                                 solutions (pmap #(solve %) boards)]
+                             (doseq [solution solutions] (write-file solution)))
+        :else (println "Usage: SudokuSolver <file name>"))
+  (System/exit 0))

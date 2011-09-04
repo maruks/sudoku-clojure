@@ -1,12 +1,20 @@
 (ns sudoku.io
-  (:require [clojure.contrib.duck-streams :as dst])
+  (:require [clojure.java.io :as io] )
   (:require [clojure.contrib.string :as str] ))
 
-(defn readFile [f]
-  (vec (map #(Integer. (.trim %))(str/split #",|\n" (slurp f)))))
+(defn read-file [f]
+  (with-open [rdr (io/reader f)]
+    (let [digits (filter #(Character/isDigit %) (reduce concat '() (line-seq rdr)))]
+      (vec (map #(Integer. (.toString %)) digits)))))
+  
+(defn read-batch-file [f]
+  (let [rdr (io/reader f)
+        lines (line-seq rdr)]
+    (for [line lines]
+      (vec (map #(Integer. (.toString %)) (seq (.trim line)))))))
 
-(defn writeFile [f vec]
-  (if (nil? vec)
-    (dst/spit f "No solution")
-    (let [s (apply str(interpose "\n" (for [p (partition 9 vec)] (apply str(interpose "," p)))))]
-      (dst/spit f s))))
+(defn write-file [vek]
+    (if (nil? vek)
+      (println "No solution")
+      (let [s (apply str(interpose "\n" (for [p (partition 9 vek)] (apply str(interpose \, p)))))]
+        (println (str s "\n")))))

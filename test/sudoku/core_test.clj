@@ -1,17 +1,17 @@
 (ns sudoku.core-test
   (:use sudoku.core sudoku.io clojure.test midje.sweet))
 
-(def p1 (readFile "test/resources/puzzle1.txt"))
-(def p2 (readFile "test/resources/puzzle2.txt"))
-(def p3 (readFile "test/resources/puzzle3.txt"))
-(def p4 (readFile "test/resources/puzzle4.txt"))
-(def p5 (readFile "test/resources/puzzle5.txt"))
-(def p6 (readFile "test/resources/puzzle6.txt"))
+(def p1 (read-file "test/resources/puzzle1.txt"))
+(def p2 (read-file "test/resources/puzzle2.txt"))
+(def p3 (read-file "test/resources/puzzle3.txt"))
+(def p4 (read-file "test/resources/puzzle4.txt"))
+(def p5 (read-file "test/resources/puzzle5.txt"))
+(def p6 (read-file "test/resources/puzzle6.txt"))
 
-(def s3 (readFile "test/resources/sol3.txt"))
-(def s4 (readFile "test/resources/sol4.txt"))
-(def s5 (readFile "test/resources/sol5.txt"))
-(def s6 (readFile "test/resources/sol6.txt"))
+(def s3 (read-file "test/resources/sol3.txt"))
+(def s4 (read-file "test/resources/sol4.txt"))
+(def s5 (read-file "test/resources/sol5.txt"))
+(def s6 (read-file "test/resources/sol6.txt"))
 
 (def firstRow #{2 0 8 6 7})
 (def secondRow #{3 0 2 5})
