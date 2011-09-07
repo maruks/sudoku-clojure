@@ -10,6 +10,6 @@
                              (write-file solution))
         (= (count args) 2) (let [boards (read-batch-file (first args))
                                  solutions (pmap #(solve %) boards)]
-                             (doseq [solution solutions] (write-file solution)))
-        :else (println "Usage: SudokuSolver <file name>"))
-  (System/exit 0))
+                             (doseq [solution solutions] (write-file solution))
+                             (shutdown-agents))
+        :else (println "Usage: SudokuSolver <file name>")))
