@@ -4,13 +4,10 @@
   (:gen-class))
 
 
-(defn parmap [f coll] (let [agents (map #(agent %) coll)]
-                        (doseq [a agents]
-                           (do (println "!")
-                           (println (deref a)))
-                           
-                           )))
-
+(defn parmap [f coll] (let [agents (map agent coll)]
+                        (do
+                          (doseq [a agents] (send a f) (apply await agents))
+                          (map deref agents))))
 
 (def functions {:s map :p pmap :a parmap})
 
