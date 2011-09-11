@@ -31,5 +31,5 @@
     (if (nil? s)
       vek
       (if (seq (s 1))
-         (let [sol (for [i (s 1)] (solve (assoc vek (first s) i))) ]
+         (let [sol (for [i (sort (s 1))] (solve (assoc vek (first s) i))) ]
           (find-first #(not (nil? %)) sol))))))
