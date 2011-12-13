@@ -1,5 +1,5 @@
 (ns sudoku.io-test
-  (:use sudoku.io clojure.test midje.sweet))
+  (:use sudoku.io midje.sweet))
 
 (def p (read-file "test/resources/puzzle1.txt"))
 
