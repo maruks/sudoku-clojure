@@ -27,9 +27,8 @@
       (reduce #(if (< (count (second %1)) (count (second %2))) %1 %2) sets))))
 
 (defn solve [vek]
-  (let [s (smallest-change-set vek)]
-    (if (nil? s)
-      vek
-      (if (seq (second s))
-         (let [sol (for [i (sort (second s))] (solve (assoc vek (first s) i))) ]
-          (find-first #(not (nil? %)) sol))))))
+  (if-let [s (smallest-change-set vek)]
+    (when-let [x (second s)]
+      (let [sol (for [i (sort x)] (solve (assoc vek (first s) i))) ]
+        (find-first #(not (nil? %)) sol)))
+    vek))
