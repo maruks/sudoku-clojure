@@ -13,12 +13,12 @@
     (for [line lines]
       (vec (map #(Integer. (.toString %)) (seq (.trim line)))))))
 
-
-
 (defn write-file [vek]
   (if vek
     (let [v (map (fn [i] (str
                           (vek (dec i))
-                          (if (zero? (rem i 9)) (if (zero? (rem i 27)) "\n\n" "\n") (if (zero? (rem i 3)) "  " " ")))) (range 1 82))]
+                          (if (zero? (rem i 9))
+                            (if (zero? (rem i 27)) "\n\n" "\n")
+                            (if (zero? (rem i 3)) "  " " ")))) (range 1 82))]
       (println (apply str v)))
     (println "No solution")))
