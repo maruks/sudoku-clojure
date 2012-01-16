@@ -2,26 +2,28 @@
   (:use clojure.set)
   (:use [clojure.contrib.seq :only [find-first]]))
 
-(defn select-row [board index]
+(defmulti indexes (fn [what index] what))
+
+(defmethod indexes :row [what index]
   (let [start (- index (rem index 9))
         end (+ start 9)]
-    (set (map #(board %) (range start end)))))
+    (range start end)))
 
-(defn select-column [board index]
+(defmethod indexes :column [what index]
   (let [start (rem index 9)
         end (+ start 73)]
-    (set (map #(board %) (range start end 9)))))
+    (range start end 9)))
 
-(defn select-square [board index]
+(defmethod indexes :square [what index]
   (let [x (- (rem index 9)(rem (rem index 9) 3))
         y (- (quot index 9) (rem (quot index 9) 3))
         spos (+ x (* y 9))
-        r (range spos (+ spos 3))
-        rng (union (set r) (set (map #(+ % 9) r)) (set (map #(+ % 18) r)))]
-    (set (map #(board %) rng))))
+        r (range spos (+ spos 3))]
+    (union (set r) (set (map #(+ % 9) r)) (set (map #(+ % 18) r)))))
 
 (defn possible-values [board index]
-  (difference (set (range 1 10)) (select-row board index) (select-column board index) (select-square board index)))
+  (letfn [(select [what] (set (map #(board %) (indexes what index))))]
+    (difference (set (range 1 10)) (select :row) (select :column) (select :square))))
 
 (defn smallest-change-set [board]
   (when-let [sets (not-empty (map #(vector % (possible-values board %))
