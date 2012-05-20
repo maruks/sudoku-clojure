@@ -32,8 +32,7 @@
 
 (defn solve [board]
   (if-let [change (smallest-change-set board)]
-    (let [index (first change)
-          numbers (second change)
+    (let [[index numbers] change
           solutions (map #(solve (assoc board index %)) (sort numbers))]
       (find-first #(not (nil? %)) solutions))
     board))
